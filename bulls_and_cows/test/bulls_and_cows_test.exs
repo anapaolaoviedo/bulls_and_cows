@@ -24,4 +24,14 @@ defmodule BullsAndCowsTest do
     assert BullsAndCows.score_guess("2345", "2685") == "2 Bulls, 0 Cows"
   end
 
+  test "Scores a guess with one Cow" do
+    assert BullsAndCows.score_guess("1234", "5671") == "0 Bulls, 1 Cow"
+    assert BullsAndCows.score_guess("2345", "5678") == "0 Bulls, 1 Cow"
+  end
+
+  test "Scores a guess with two Cows" do
+    assert BullsAndCows.score_guess("1234", "2671") == "0 Bulls, 2 Cows"
+    assert BullsAndCows.score_guess("2345", "5628") == "0 Bulls, 2 Cows"
+  end
+
 end
