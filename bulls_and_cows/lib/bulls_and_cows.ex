@@ -4,9 +4,13 @@ defmodule BullsAndCows do
     guess_chars = String.graphemes(guess)
 
     bulls = count_bulls(secret_chars, guess_chars)
-    cows = count_cows(secret_chars, guess_chars)
 
-    "#{bulls} Bull#{plural(bulls)}, #{cows} Cow#{plural(cows)}"
+    if bulls == 4 do
+      "You win"
+    else
+      cows = count_cows(secret_chars, guess_chars)
+      "#{bulls} Bull#{plural(bulls)}, #{cows} Cow#{plural(cows)}"
+    end
   end
 
   defp count_bulls(secret, guess) do
@@ -15,7 +19,6 @@ defmodule BullsAndCows do
   end
 
   defp count_cows(secret, guess) do
-    # Exclude bulls first
     secret_wo_bulls = Enum.with_index(secret)
       |> Enum.reject(fn {s, i} -> Enum.at(guess, i) == s end)
       |> Enum.map(fn {s, _} -> s end)
